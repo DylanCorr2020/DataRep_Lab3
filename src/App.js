@@ -19,6 +19,10 @@ import {
   Link
 } from "react-router-dom";
 
+//imported components read and create
+import Create from './Components/create';
+import Read from './Components/read';
+
 
 
 
@@ -41,16 +45,16 @@ render(){
     <Navbar.Brand href="/">Navbar</Navbar.Brand>
     <Nav className="me-auto">
       <Nav.Link href="/">Home</Nav.Link>
-      <Nav.Link href="/footer">Footer</Nav.Link>
-      <Nav.Link href="/header">Pricing</Nav.Link>
+      <Nav.Link href="/create">Create</Nav.Link>
+      <Nav.Link href="/read">Read</Nav.Link>
     </Nav>
     </Container>
     </Navbar>
        
        <Switch>
          <Route path = "/"exact><Content></Content></Route>
-         <Route path = "/header"><Header></Header></Route>
-         <Route path = "/footer"><Footer></Footer></Route>
+         <Route path = '/create' component = {Create} exact/>
+         <Route path = '/read' component = {Read} exact/>
        </Switch>
      </div>
     </Router>
