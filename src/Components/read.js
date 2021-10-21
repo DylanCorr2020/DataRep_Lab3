@@ -1,56 +1,53 @@
 import React, { Component } from 'react';
 import Movies from './movies';
+import axios from 'axios';
 //import react 
+//import axios and install it on the command prompt
 
 //Read class inherits component
-class Read extends Component{
+class Read extends Component {
 
-//we want read in our movies
+ 
+  state = {
+    movies: []
+  };
 
-//create an object in order to store data
-//json collection of movie componets
-//we wnat to pass dta from our read compnent to our movies component
-//create an object in movies
-//anytime i want to write javascriot in html use curly brackets
-//this.state.movies is used in order to pass the object into movies component
+  //the method conponetDidMount is a component lifecycle hook
+  //called every time our component is mounted 
+  //or becomes active
+  //we want to make our axois call in this method
 
-state = {
-   movies:[ {
-    "Title": "Avengers: Infinity War",
-    "Year": "2018",
-    "imdbID": "tt4154756",
-    "Type": "movie",
-    "Poster": "https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_SX300.jpg"
-   },
-    
-   {
-    "Title": "Captain America: Civil War",
-    "Year": "2016",
-    "imdbID": "tt3498820",
-    "Type": "movie",
-    "Poster": "https://m.media-amazon.com/images/M/MV5BMjQ0MTgyNjAxMV5BMl5BanBnXkFtZTgwNjUzMDkyODE@._V1_SX300.jpg"
-    },
+  //there are two states in a promise fufill and rejected
+  //for a fufill sate we use .then()
+  //in the response function we want to update our movie array up top with 
+  //the information we just got back thats in json format
+  //else it will show an error if url didnt come back
 
-    {
-    "Title": "Charlie Wilson's War",
-    "Year": "2007",
-    "imdbID": "tt0472062",
-    "Type": "movie",
-    "Poster": "https://m.media-amazon.com/images/M/MV5BMTgwMDgwMDc4MF5BMl5BanBnXkFtZTYwOTU3MDM4._V1_SX300.jpg"
-    }
-   ]
-};
+  componentDidMount() {
 
-//render method taking from js libary
-render(){
-    return(
-  <div>
-      <h1>This is the raed componet</h1>
+    //the result of this method will return a promise 
+    axios.get('https://jsonblob.com/api/jsonblob/894944504570986496')
+      .then(
+        (response) => {
+          this.setState({ movies: response.data.movies})
+        }
+      )
+      .catch(
+        (error)=>{console.log(error);}
+      );
 
-    <Movies movies={this.state.movies}></Movies>
-  </div>
+  }
+
+  //render method taking from js libary
+  render() {
+    return (
+      <div>
+        <h1>This is the raed componet</h1>
+
+        <Movies movies={this.state.movies}></Movies>
+      </div>
     );
-}
+  }
 
 }
 
